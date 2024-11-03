@@ -1,5 +1,7 @@
 # WhisperWrite - Simple Speech Recognition with OpenAI Whisper API
 
+This is a simple speech recognition tool, it can be useful in Windows or other OS that do not support speech recognition.
+
 ### Installation
 ```bash
 pip install -r requirements.txt

@@ -37,7 +37,7 @@ def start_listen_right_ctrl():
 threading.Thread(target=start_listen_right_ctrl).start()
 
 def listen_and_save(filename):
-    print("Press 'Right Shift' to start recording")
+    print("Press 'Right Ctrl' to start recording")
     while not is_right_ctrl_pressed:
         sleep(0.1)
     print("Recording...")

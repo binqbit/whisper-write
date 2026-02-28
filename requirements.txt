@@ -1,8 +1,0 @@
-dotenv
-numpy
-keyboard
-pynput
-pyaudio
-wave
-openai
-winsound

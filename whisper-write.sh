@@ -1,3 +1,7 @@
 #!/bin/bash
+set -euo pipefail
 
-python3 ./src/main.py "$@"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+cd "$SCRIPT_DIR"
+exec "$SCRIPT_DIR/bin/whisper-write" --output paste --daemon "$@"

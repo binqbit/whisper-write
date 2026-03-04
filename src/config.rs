@@ -26,6 +26,7 @@ pub struct AppConfig {
     pub openai: OpenAiConfig,
     pub daemon: bool,
     pub continuous: bool,
+    pub restore_clipboard: bool,
 }
 
 impl AppConfig {
@@ -47,6 +48,7 @@ impl AppConfig {
             openai,
             daemon: args.daemon,
             continuous: args.continuous,
+            restore_clipboard: args.restore_clipboard,
         })
     }
 }
@@ -77,4 +79,8 @@ struct Args {
     /// Keep listening after each segment instead of exiting after one
     #[arg(short = 'c', long = "continuous")]
     continuous: bool,
+
+    /// Restore previous clipboard contents after paste
+    #[arg(long = "restore-clipboard")]
+    restore_clipboard: bool,
 }

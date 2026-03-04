@@ -33,6 +33,7 @@ Optional flags:
 - `--device <index>` selects a specific input device by index (from the default host enumeration).
 - `--daemon` runs in the background (Linux only).
 - `--continuous` keeps listening after each segment instead of exiting.
+- `--restore-clipboard` preserves current clipboard contents when using a paste fallback.
 
 ## Notes
 - Translation uses the `/audio/translations` endpoint, which currently requires the `whisper-1` model.
@@ -43,6 +44,7 @@ Optional flags:
 - Default output is `auto`: on Wayland it tries `wtype` (virtual keyboard); otherwise it falls back to clipboard paste.
 - Use `--output type` to force direct typing, or `--output paste` to force clipboard paste.
 - In Linux, when `--output type` receives non-ASCII text (for example Cyrillic), the app falls back to a clipboard paste path to preserve correct characters.
+- By default, clipboard pastes replace the current clipboard content. Pass `--restore-clipboard` to restore the previous clipboard text after pasting.
 - The app does not depend on keyboard layout detection. By default it uses `auto` output:
   - On Wayland it tries `wtype` (virtual keyboard).
   - Otherwise it falls back to clipboard paste.

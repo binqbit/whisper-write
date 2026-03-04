@@ -10,10 +10,11 @@ pub struct Typer {
     mode: OutputMode,
     enigo: Option<Enigo>,
     clipboard: Option<Clipboard>,
+    restore_clipboard: bool,
 }
 
 impl Typer {
-    pub fn new(mode: OutputMode) -> Result<Self> {
+    pub fn new(mode: OutputMode, restore_clipboard: bool) -> Result<Self> {
         let enigo = Some(Enigo::new());
         let clipboard = if matches!(mode, OutputMode::Paste | OutputMode::Auto) {
             Some(Clipboard::new()?)
@@ -24,6 +25,7 @@ impl Typer {
             mode,
             enigo,
             clipboard,
+            restore_clipboard,
         })
     }
 
@@ -41,7 +43,7 @@ impl Typer {
                 if let (Some(clipboard), Some(enigo)) =
                     (self.clipboard.as_mut(), self.enigo.as_mut())
                 {
-                    paste_with_restore(clipboard, enigo, text)?;
+                    paste(clipboard, enigo, text, self.restore_clipboard)?;
                     return Ok(());
                 }
 
@@ -62,7 +64,7 @@ impl Typer {
                     if let (Some(clipboard), Some(enigo)) =
                         (self.clipboard.as_mut(), self.enigo.as_mut())
                     {
-                        paste_with_restore(clipboard, enigo, text)?;
+                        paste(clipboard, enigo, text, self.restore_clipboard)?;
                         return Ok(());
                     }
                 }
@@ -75,7 +77,7 @@ impl Typer {
                 if let (Some(clipboard), Some(enigo)) =
                     (self.clipboard.as_mut(), self.enigo.as_mut())
                 {
-                    paste_with_restore(clipboard, enigo, text)?;
+                    paste(clipboard, enigo, text, self.restore_clipboard)?;
                 }
             }
         }
@@ -116,6 +118,21 @@ fn try_wtype(text: &str) -> Result<()> {
     }
 }
 
+fn paste(
+    clipboard: &mut Clipboard,
+    enigo: &mut Enigo,
+    text: &str,
+    restore_clipboard: bool,
+) -> Result<()> {
+    if restore_clipboard {
+        paste_with_restore(clipboard, enigo, text)?;
+        return Ok(());
+    }
+
+    paste_without_restore(clipboard, enigo, text)?;
+    Ok(())
+}
+
 fn paste_with_restore(clipboard: &mut Clipboard, enigo: &mut Enigo, text: &str) -> Result<()> {
     let previous = clipboard.get_text().ok();
     clipboard.set_text(text)?;
@@ -125,6 +142,14 @@ fn paste_with_restore(clipboard: &mut Clipboard, enigo: &mut Enigo, text: &str) 
     if let Some(previous) = previous {
         clipboard.set_text(&previous)?;
     }
+    Ok(())
+}
+
+fn paste_without_restore(clipboard: &mut Clipboard, enigo: &mut Enigo, text: &str) -> Result<()> {
+    clipboard.set_text(text)?;
+    enigo.key_down(Key::Control);
+    enigo.key_click(Key::Layout('v'));
+    enigo.key_up(Key::Control);
     Ok(())
 }
 

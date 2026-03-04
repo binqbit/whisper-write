@@ -21,7 +21,7 @@ fn main() -> Result<()> {
 
     let client = OpenAiClient::new(config.openai.clone())?;
     let listener = SpeechListener::new(config.speech.clone(), config.device_index)?;
-    let typer = Typer::new(config.output_mode)?;
+    let typer = Typer::new(config.output_mode, config.restore_clipboard)?;
 
     let mut app = App {
         config,

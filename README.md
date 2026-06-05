@@ -31,7 +31,7 @@ cargo run --release -- -t
 Optional flags:
 - `--output <auto|type|paste>` chooses output method (default: auto).
 - `--device <index>` selects a specific input device by index (from the default host enumeration).
-- `--daemon` runs in the background (Linux only).
+- `--daemon` runs in the background (Linux only), writes logs to `whisper-write.log`, and uses `whisper-write.pid` to prevent duplicate daemon starts from the same working directory.
 - `--continuous` keeps listening after each segment instead of exiting.
 - `--restore-clipboard` preserves current clipboard contents when using a paste fallback.
 

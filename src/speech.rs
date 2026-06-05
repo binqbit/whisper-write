@@ -111,7 +111,7 @@ impl SpeechListener {
 
 struct ContinuousSpeechListener {
     config: SpeechConfig,
-    output_sender: Sender<SpeechSegment>,
+    output_sender: Option<Sender<SpeechSegment>>,
     device_index: Option<usize>,
     stop_flag: Arc<AtomicBool>,
     handle: Option<thread::JoinHandle<()>>,
@@ -125,7 +125,7 @@ impl ContinuousSpeechListener {
     ) -> Self {
         Self {
             config,
-            output_sender,
+            output_sender: Some(output_sender),
             device_index,
             stop_flag: Arc::new(AtomicBool::new(false)),
             handle: None,
@@ -136,7 +136,9 @@ impl ContinuousSpeechListener {
         if self.handle.is_some() {
             return;
         }
-        let output_sender = self.output_sender.clone();
+        let Some(output_sender) = self.output_sender.take() else {
+            return;
+        };
         let stop_flag = Arc::clone(&self.stop_flag);
         let config = self.config.clone();
         let device_index = self.device_index;

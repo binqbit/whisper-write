@@ -2475,6 +2475,7 @@ dependencies = [
  "dotenvy",
  "enigo",
  "hound",
+ "libc",
  "reqwest",
  "serde",
  "serde_json",

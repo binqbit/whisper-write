@@ -1,8 +1,24 @@
 
-[1780700579] starting whisper-write daemon
+[1786027702] starting whisper-write daemon
 Listening for speech... (Ctrl+C to exit)
 Speech detected.
-Segment #1 captured (2.9s).
+Segment #1 captured (3.9s).
 Transcribing audio...
-Text: Ну а тепер перевіримо, як воно працює.
+Text: Хелло ворлд, раз, два, три, чотири, п'ять, як воно працює.
+
+
+[1786027714] starting whisper-write daemon
+Listening for speech... (Ctrl+C to exit)
+Speech detected.
+Segment #1 captured (5.0s).
+Transcribing audio...
+Text: Як написати програму Hello World на Rust?
+
+
+[1786027724] starting whisper-write daemon
+Listening for speech... (Ctrl+C to exit)
+Speech detected.
+Segment #1 captured (6.2s).
+Transcribing audio...
+Text: Блядь, ты что, теперь не будешь у меня хуйню всякую морозить, а будешь нормально писать?
 

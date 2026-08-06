@@ -421,7 +421,7 @@ impl SpeechDetector {
                 if self.start_trigger_count >= self.config.start_trigger_chunks {
                     self.speech_active = true;
                     self.speech_frames = vec![chunk];
-                    self.trailing_silence_chunks = 1;
+                    self.trailing_silence_chunks = 0;
                     self.start_trigger_count = 0;
                     return SpeechEvent::Detected;
                 }

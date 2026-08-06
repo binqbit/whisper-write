@@ -5,7 +5,7 @@ use reqwest::Url;
 use serde::Deserialize;
 
 const DEFAULT_BASE_URL: &str = "https://api.openai.com/v1";
-const DEFAULT_TRANSCRIBE_MODEL: &str = "gpt-4o-transcribe";
+const DEFAULT_TRANSCRIBE_MODEL: &str = "gpt-transcribe";
 const DEFAULT_TRANSLATE_MODEL: &str = "whisper-1";
 
 #[derive(Debug, Clone)]
